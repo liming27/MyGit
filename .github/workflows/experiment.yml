@@ -51,13 +51,13 @@ jobs:
     steps:
       # Workaround: https://github.com/actions/checkout/issues/165#issuecomment-657673315
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Create LFS file list
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
       - name: Restore LFS cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: lfs-cache
         with:
           path: .git/lfs
@@ -70,7 +70,7 @@ jobs:
           git reset --hard
 
       - name: Restore Library cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: lib-cache
         with:
           path: test-projects/${{ matrix.projectPath }}/Library
@@ -110,7 +110,7 @@ jobs:
 
       - name: Upload build artifacts
 #        if: ${{ matrix.unityVersion == '2021.1.6f1' || matrix.unityVersion == '2020.1.6f1' || matrix.unityVersion == '2019.4.6f1' || matrix.unityVersion == '2019.3.6f1' || matrix.unityVersion == '2019.2.6f1' || matrix.unityVersion == '2019.1.6f1' || matrix.unityVersion == '2018.4.6f1' }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Build (${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-${{ matrix.unityVersion }})
           path: build/${{ matrix.targetPlatform }}
