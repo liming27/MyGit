@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Create LFS file list
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
       - name: Restore LFS cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: lfs-cache
         with:
           path: .git/lfs
@@ -32,20 +32,20 @@ jobs:
           git reset --hard
 
       - name: Restore Library cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: test-projects/test-project/Library
           key: Library-test-project-WebGL
 
       # Test
       - name: Run tests
-        uses: game-ci/unity-test-runner@v2
+        uses: game-ci/unity-test-runner@v3
         with:
           projectPath: test-projects/test-project
 
       # Build
       - name: Build project
-        uses: game-ci/unity-builder@v2
+        uses: game-ci/unity-builder@v3
         with:
           projectPath: test-projects/test-project
           targetPlatform: WebGL
@@ -67,10 +67,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checkout repository
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # Request manual activation file
-      - uses: game-ci/unity-request-activation-file@v2
+      - uses: game-ci/unity-request-activation-file@v3
         id: getManualLicenseFile
 
       # Upload artifact (Unity_v20XX.X.XXXX.alf)
@@ -83,29 +83,29 @@ jobs:
 #    name: Request activation ✔
 #    runs-on: ubuntu-latest
 #    steps:
-#      - uses: actions/checkout@v2
-#      - uses: game-ci/unity-activate@v2
+#      - uses: actions/checkout@v3
+#      - uses: game-ci/unity-activate@v3
 #
 #  activateAndThenReturnLicense:
 #    name: returnLicense 🎈
 #    runs-on: ubuntu-latest
 #    steps:
-#      - uses: actions/checkout@v2
-#      - uses: game-ci/unity-activate@v2
-#      - uses: game-ci/unity-return-license@v2
+#      - uses: actions/checkout@v3
+#      - uses: game-ci/unity-activate@v3
+#      - uses: game-ci/unity-return-license@v3
 
   testRunnerInEditMode:
     name: Test in editmode 📝
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Create LFS file list
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
       - name: Restore LFS cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: lfs-cache
         with:
           path: .git/lfs
@@ -118,7 +118,7 @@ jobs:
           git reset --hard
 
       - name: Restore Library cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: test-projects/test-project/Library
           key: Library-test-project
@@ -126,7 +126,7 @@ jobs:
             Library-test-
 
       # Configure test runner
-      - uses: game-ci/unity-test-runner@v2
+      - uses: game-ci/unity-test-runner@v3
         id: testRunner
         with:
           projectPath: test-projects/test-project
@@ -143,13 +143,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Create LFS file list
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
       - name: Restore LFS cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: lfs-cache
         with:
           path: .git/lfs
@@ -162,7 +162,7 @@ jobs:
           git reset --hard
 
       - name: Restore Library cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: test-projects/test-project/Library
           key: Library-test-project-${{ matrix.targetPlatform }}
@@ -171,7 +171,7 @@ jobs:
             Library-
 
       # Configure test runner
-      - uses: game-ci/unity-test-runner@v2
+      - uses: game-ci/unity-test-runner@v3
         id: testRunner
         with:
           projectPath: test-projects/test-project
@@ -195,13 +195,13 @@ jobs:
     steps:
       # Checkout repository (required to test local actions)
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Create LFS file list
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
       - name: Restore LFS cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: lfs-cache
         with:
           path: .git/lfs
@@ -214,7 +214,7 @@ jobs:
           git reset --hard
 
       - name: Restore Library cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: test-projects/test-project/Library
           key: Library-test-project-${{ matrix.targetPlatform }}
@@ -223,7 +223,7 @@ jobs:
             Library-
 
       # Configure test runner
-      - uses: game-ci/unity-test-runner@v2.0-alpha-5
+      - uses: game-ci/unity-test-runner@v3.0-alpha-5
         id: testRunner
         with:
           projectPath: test-projects/test-project
@@ -257,13 +257,13 @@ jobs:
           - WebGL # WebGL.
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Create LFS file list
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
       - name: Restore LFS cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: lfs-cache
         with:
           path: .git/lfs
@@ -276,14 +276,14 @@ jobs:
           git reset --hard
 
       - name: Restore Library cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ matrix.projectPath }}/Library
           key: Library-buildAndTest-${{ matrix.projectPath }}-buildAndTest-${{ matrix.targetPlatform }}
           restore-keys: |
             Library-${{ matrix.projectPath }}-buildAndTest-
             Library-${{ matrix.projectPath }}-
-      - uses: game-ci/unity-test-runner@v2
+      - uses: game-ci/unity-test-runner@v3
         id: testRunner
         with:
           projectPath: ${{ matrix.projectPath }}
@@ -291,7 +291,7 @@ jobs:
         with:
           name: Test results (all modes)
           path: ${{ steps.testRunner.outputs.artifactsPath }}
-      - uses: game-ci/unity-builder@v2
+      - uses: game-ci/unity-builder@v3
         with:
           projectPath: ${{ matrix.projectPath }}
           targetPlatform: ${{ matrix.targetPlatform }}
